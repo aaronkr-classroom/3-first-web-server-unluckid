@@ -1,16 +1,26 @@
 // listing4.1.js
 
-/**
- * simple_server 예시
- *
- * 코드: p. 84-85
- * 설명: p. 83-84 (여기 주석에서도 포함)
- */
 
-// 애플리케이션에서 사용할 포트 번호인 3000을 지정한다. (80번호는 HTTP, 443번호는 HTTPS)
-
+const port = 3000;
+const http = require("http");
+const httpStatus = require("http-status-codes");
 
 // http라는 특정 Node.js 모듈을 가져와 상수로 저장한다.
+const app = http.createServer((req, res) => {
+  console.log("Message received!");
+  res.writeHead(httpStatus.OK, {
+    "Content-Type": "text/html"
+  });
+  const re_Msg = "<h1>hello everybody!</h1><p>Fun?</p>";
+  console.log("sent~~");
+  if (process.env.NODE_ENV === 'test') {
+    app.listen(port);
+    console.log(`Server at: http://localhost:${port}`);
+  }
+});
+
+module.exports = app;
+
 
 
 // http 상태 코드를 나타내는 상수를 제공하려면 http-status-codes 패키지가 필요하다.
